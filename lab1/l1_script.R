@@ -10,8 +10,8 @@ rhs = b + failures
 nDraws = 10000
 ######################################################
 # a)
-SD_list = c()
-E_list = c()
+SD = c()
+E = c()
 result = c()
 for (n in seq(1, nDraws, 1)){
   result[n] = rbeta(n, lhs, rhs)
