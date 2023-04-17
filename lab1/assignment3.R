@@ -10,7 +10,7 @@ lambda <- 0.5
 #the given u
 u <- 2.4
 #Fine grid of K:s
-grid <- seq(from = 0.01, to = 10, by = 0.01)
+grid <- seq(from = 0.01, to = 6, by = 0.01)
 #A function for the posterior.
 posterior <- function(k)
 {
