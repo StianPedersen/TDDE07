@@ -19,9 +19,6 @@ for (n in seq(1, nDraws, 1)){
   E[n] = mean(result)
 }
 
-
-
-
 plot(E, main = "Expected value as a function of #Draws",
      xlab = "# of Draws",
      ylab = "Expected Value E[theta|y]")
@@ -55,13 +52,13 @@ for (value in drawed_values){
     under = under + 1
   }
 }
-prob_over = over / length(drawed_values)
+#prob_over = over / length(drawed_values)
 prob_under = under / length(drawed_values)
-prob_over
+#prob_over
 prob_under
 
-temp = pbeta(0.3, lhs, rhs)
-temp
+beta_posterior = pbeta(0.3, lhs, rhs)
+beta_posterior
 
 ##########################################################
 #C
