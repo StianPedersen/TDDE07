@@ -56,27 +56,36 @@ print(OptimRes$par)
 # draw from the random multivariate norm using the means from the optim.
 # The inverse hessian is the sigma for the approximation for the parameter vector
 # b
-beta = rmvnorm(1000, mean = OptimRes$par, sigma = -solve(OptimRes$hessian))
-x = c(1,18,11,7,40,1,1)
+get_probability<- function(m,s){
+  x = c(1,18,11,7,40,1,1)
+  beta = rmvnorm(1000, mean =m , sigma = s)
+  prob_1 = exp(t(as.matrix(x)) %*% t(beta)) / (1 + exp(t(as.matrix(x)) %*% t(beta)))
+  # Logistic regression gives prob = 1, we want prob = 0 (1 - prob=1)
+  prob_0 = 1 - prob_1 
+}
+
 # Probability logistic regression model from task description
-prob_1 = exp(t(as.matrix(x)) %*% t(beta)) / (1 + exp(t(as.matrix(x)) %*% t(beta)))
-# Logistic regression gives prob = 1, we want prob = 0 (1 - prob=1)
-prob_0 = 1 - prob_1 
+prob_0 = get_probability(OptimRes$par,-solve(OptimRes$hessian) )
+
 plot(density(prob_0))
 
 # C ############################################
-# Same as in B
-approx_b_vector = rmvnorm(1000, mean = OptimRes$par, sigma = -solve(OptimRes$hessian)) 
-p = exp(t(as.matrix(x)) %*% t(approx_b_vector)) / (1 + exp(t(as.matrix(x)) %*% t(approx_b_vector)))
-
-# Sample 13 woman 1x with the probability p
-bino_simulation = rbinom(13, 1, p)
-# Sum which ones are 0 and 1
-sum_0 = sum(bino_simulation == 0)
-sum_1 = sum(bino_simulation == 1)
-
-# Bar plot to see the amount of work/no work
-barplot(c(sum_0, sum_1),col=c("Red","Blue"),legend=c("Not working", "working"),ylim=c(0,15))
-
-# The percent of women not working is the amount of no work divided by the total amount
-print(sum_0/(sum_0 + sum_1))
+get_probability<- function(m,s){
+  x = c(1,18,11,7,40,1,1)
+  beta = rmvnorm(1000, mean =m , sigma = s)
+  prob_first_woman = exp(t(as.matrix(x)) %*% t(beta)) / (1 + exp(t(as.matrix(x)) %*% t(beta)))
+  prob_first_woman = 1 - prob_first_woman 
+  probability_sum =   prob_first_woman
+  for(i in 1:12)
+  {
+    beta = rmvnorm(1000, mean =m , sigma = s)
+    prob_loop = exp(t(as.matrix(x)) %*% t(beta)) / (1 + exp(t(as.matrix(x)) %*% t(beta)))
+    prob_loop = 1 - prob_loop 
+    probability_sum = probability_sum + prob_loop
+    
+  }
+  ret_value = probability_sum/13
+  ret_value
+}
+beta_c = get_beta_c(OptimRes$par,-solve(OptimRes$hessian) )
+plot(density(beta_c))
