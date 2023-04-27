@@ -3,41 +3,40 @@
 library("mvtnorm")
 library("bayestestR")
 WomenData = read.table("WomenAtWork.dat",sep = " ",header = T)
-Y = WomenData[,1]
-X = WomenData[,2:8]
+Y = WomenData[,1] # Work or No work (0, 1)
+X = WomenData[,2:8] # Attributes
 
-n = 132
-tao = 2
-I_matrix = diag(7)
+tao = 2 # From task
+I_matrix = diag(7) # 7 variables, needed for b ~ N(*, *)
 
-# From lecture 6 code     
+# Code from lecture 6, copypaste   
 logistic_posterior <- function(initVal, y, X, mu, Sigma)
 {
   linPred <- as.matrix(X)%*%initVal;
-  logLik <- sum( linPred*y - log(1 + exp(linPred)) );
-  
-  # density "d", "mv" multivariate, initval???
-  logPrior <- dmvnorm(initVal, mu, Sigma, log=TRUE);
-  return(logLik + logPrior)
+  logLik <- sum( linPred*y - log(1 + exp(linPred)) ); # Likelihood
+  logPrior <- dmvnorm(initVal, mu, Sigma, log=TRUE); # Denisty multivariate normal, prior
+  return(logLik + logPrior) 
 }
 
-initVal <- rnorm(7)
-mu <- as.matrix(rep(0,7)) # Prior mean vector
-Sigma = (tao^2)*I_matrix
-prior = dnorm(0,(tao^2)*I_matrix)
+initVal = rnorm(7) # Init the 7 random variable thetas using the normal distribution
+mu <- as.matrix(rep(0,7)) # Prior mean vector is 0 from the task description
+Sigma = (tao^2)*I_matrix # Sigma = the right value in b ~ N(*, *) from task description
 
+# Send into the function from lecture 6
 OptimRes <- optim(initVal,logistic_posterior,gr=NULL,Y,X,mu,Sigma,method=c("BFGS"),
                   control=list(fnscale=-1),hessian=TRUE)
 
+# Posterior and approx posteriod std deviation from optim, same way as in 
+# lecture 6 vode
 print("Posterior mode is")
-OptimRes$par
-
+OptimRes$par 
 approxPostStd <- sqrt(diag(solve(-OptimRes$hessian)))
 print('The approximate posterior standard deviation is:')
 print(approxPostStd)
 
-x_hat = mean(WomenData$NSmallChild)
-ci = (1.96 * approxPostStd[6])/sqrt(nrow(WomenData))
+x_hat = mean(WomenData$NSmallChild) # Get the mean from the NSmallChild data
+# 95% Confidence interval calculations from wikipedia 
+ci = (1.96 * approxPostStd[6])/sqrt(nrow(WomenData)) 
 ci_upper = x_hat + ci
 ci_lower = x_hat - ci
 ci_upper
@@ -49,31 +48,35 @@ print("Comparison")
 print(glmModel$coefficients)
 print(OptimRes$par)
 
-# The confidence interval does not contain 0 which indicates that the var
-# is important. 
-# The comparison is almoost the same which means that the approximation is 
-# reasonable
+# The confidence interval does not contain 0 which indicates that the variable
+# is important. The values are almoost the same which means that the  
+# approximation is reasonable
 
 # B ###################################################
-approxPostStd
-OptimRes$par
-
-beta = rmvnorm(10000, mean = OptimRes$par, sigma = -solve(OptimRes$hessian))
-beta_t = t(beta)
+# draw from the random multivariate norm using the means from the optim.
+# The inverse hessian is the sigma for the approximation for the parameter vector
+# b
+beta = rmvnorm(1000, mean = OptimRes$par, sigma = -solve(OptimRes$hessian))
 x = c(1,18,11,7,40,1,1)
-beta
+# Probability logistic regression model from task description
 prob_1 = exp(t(as.matrix(x)) %*% t(beta)) / (1 + exp(t(as.matrix(x)) %*% t(beta)))
+# Logistic regression gives prob = 1, we want prob = 0 (1 - prob=1)
 prob_0 = 1 - prob_1 
 plot(density(prob_0))
 
 # C ############################################
-b_i = rmvnorm(10000, mean = OptimRes$par, sigma = -solve(OptimRes$hessian))
-p = exp(t(as.matrix(x)) %*% t(b_i)) / (1 + exp(t(as.matrix(x)) %*% t(b_i)))
-bino_simulation = rbinom(13, 1,p)
-bino_simulation
+# Same as in B
+approx_b_vector = rmvnorm(1000, mean = OptimRes$par, sigma = -solve(OptimRes$hessian)) 
+p = exp(t(as.matrix(x)) %*% t(approx_b_vector)) / (1 + exp(t(as.matrix(x)) %*% t(approx_b_vector)))
+
+# Sample 13 woman 1x with the probability p
+bino_simulation = rbinom(13, 1, p)
+# Sum which ones are 0 and 1
 sum_0 = sum(bino_simulation == 0)
-sum_0
 sum_1 = sum(bino_simulation == 1)
+
+# Bar plot to see the amount of work/no work
 barplot(c(sum_0, sum_1),col=c("Red","Blue"),legend=c("Not working", "working"),ylim=c(0,15))
-print("Posterior probability")
+
+# The percent of women not working is the amount of no work divided by the total amount
 print(sum_0/(sum_0 + sum_1))
