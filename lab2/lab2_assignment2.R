@@ -87,5 +87,5 @@ get_probability<- function(m,s){
   ret_value = probability_sum/13
   ret_value
 }
-beta_c = get_beta_c(OptimRes$par,-solve(OptimRes$hessian) )
+beta_c = get_probability(OptimRes$par,-solve(OptimRes$hessian) )
 plot(density(beta_c))
