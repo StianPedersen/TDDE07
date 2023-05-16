@@ -17,9 +17,7 @@ poisson_posterior <- function(initVal, y, X, mu, Sigma)
 {
   lambda <- exp(as.matrix(X)%*%initVal);
   loglik <- sum(dpois(y,lambda, log = TRUE)); 
-  logPrior <- dmvnorm(initVal, mu, Sigma, log=TRUE); # Denisty multivariate normal, prior
-  
-  
+  logPrior <- dmvnorm(initVal, mu, Sigma, log=TRUE); # Denisty multivariate normal
   return(loglik + logPrior) 
   
 }
@@ -94,8 +92,7 @@ for(i in 1:9){
 # Seems to converge to values we got from optim.
 # D #################################################
 characteristics = c(0, 1,0,1,0,1,0,1.2,0.8)
-after_burnout <- sample_matrix[2001:10000,]
-plot(after_burnout)
+after_burnout <- sample_matrix[1001:10000,] # Decided from C
 lambda = exp(after_burnout %*% characteristics)
 dist = rpois(1000, lambda)
 no_bidders = 0
