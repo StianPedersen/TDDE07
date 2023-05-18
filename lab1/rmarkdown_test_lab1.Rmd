@@ -1,0 +1,55 @@
+---
+title: "Lab1"
+author: "Stian"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+
+```{r Lab1 task1}
+###############################################################################
+##                  TASK 1                                                   ##
+###############################################################################
+###############################################################################
+##                  TASK 1a                                                  ##
+###############################################################################
+n = 70
+success = 22
+failures = n - success
+alpha = 8
+b = 8
+
+lhs = alpha + success
+rhs = b + failures
+nDraws = 10000
+
+SD = c()
+E = c()
+result = c()
+for (n in seq(1, nDraws, 1)){
+  result[n] = rbeta(n, lhs, rhs) # Accumulating number of n draws
+  SD[n] = sd(result) 
+  E[n] = mean(result) 
+}
+
+plot(E, main = "Expected value as a function of #Draws", 
+     xlab = "# of Draws", ylab = "Expected Value E[theta|y]")
+# The true value E = alpha / (alpha + beta)
+# where our posterior gives (alpha = lhs) and (beta = rhs)
+sprintf("True Mean: %f" ,lhs / (lhs+ rhs))
+sprintf("Posterior mean: %f" ,E[nDraws])
+
+
+plot(SD, main = "SD for different sample sizes", xlab = "# of Draws",
+     ylab = "Standard deviation", ylim = c(0.03,0.08))
+# The true value 
+# SD = sqrt((alpha * beta) / (((alpha + beta)^2) *(alpha + beta + 1)))
+# where our posterior gives (alpha = lhs) and (beta = rhs)
+sprintf("True SD: %f", sqrt((lhs *rhs) / (((lhs + rhs)^2) *(lhs + rhs + 1))))
+SD[nDraws] 
+
+```
