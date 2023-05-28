@@ -15,7 +15,7 @@ grid <- seq(from = 0.01, to = 6, by = 0.01)
 posterior <- function(k)
 {
   return ((1/(2 * pi * besselI(k,0)))^10 *
-            Slambda * exp(k*(sum(cos(y-u)) - lambda)))
+            lambda * exp(k*(sum(cos(y-u)) - lambda)))
 }
 post <- c()
 for (k in grid)

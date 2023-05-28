@@ -1,0 +1,185 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{monthly\_income = c(33, 24, 48, 32, 55, 74, 23, 17) \#Given}
+\NormalTok{y \textless{}{-} monthly\_income}
+\NormalTok{n \textless{}{-} length(y)}
+\NormalTok{mu \textless{}{-} 3.6 \#Given}
+\NormalTok{tau\_2 \textless{}{-} (sum((log(y) {-} mu)\^{}2) / n) \#Given}
+\NormalTok{nDraws \textless{}{-} 10000 \#Given}
+\NormalTok{draw\_inv\_chi \textless{}{-} function(nDraws, v, s)}
+\NormalTok{\{}
+\NormalTok{    draws \textless{}{-} rchisq(nDraws, v)}
+\NormalTok{    return( (v * s)/draws )}
+\NormalTok{\}}
+\NormalTok{sigma2 \textless{}{-} draw\_inv\_chi(nDraws = nDraws, v = n, s = tau\_2)}
+
+\NormalTok{plot(density(sigma2), xlim = c(0,1),}
+\NormalTok{     main = "Density function of sigma2")}
+
+\NormalTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\NormalTok{\#b)}
+\NormalTok{\#pnorm gives the cummulativ distribution function (phi(x))}
+\NormalTok{CDF \textless{}{-} pnorm( sqrt(sigma2) / sqrt(2) )}
+\NormalTok{G \textless{}{-} ((2 * CDF) {-} 1)}
+\NormalTok{plot(density(G), main = "Density funciton for Gini{-}Coef")}
+
+
+\NormalTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\NormalTok{\#c)}
+\NormalTok{lower \textless{}{-} quantile(G, 0.025)}
+\NormalTok{upper \textless{}{-} quantile(G, 0.975)}
+
+\NormalTok{plot(density(G), main = "Density funciton for Gini{-}Coef")}
+\NormalTok{abline(v = lower, col = "red")}
+\NormalTok{abline(v = upper, col = "red")}
+\NormalTok{legend("topright", legend = c("Gini{-}distri", "Quantiles"),}
+\NormalTok{       col = c("black", "red"), lty = 1)}
+\NormalTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\NormalTok{\#d)}
+\NormalTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\NormalTok{\#\# COULD BE DONE LIKE THIS}
+\NormalTok{\#\# library("bayestestR")}
+\NormalTok{\#\# interval = eti(G,0.95)}
+\NormalTok{\#\#}
+\NormalTok{\#\# sorted\_G = sort(G)}
+\NormalTok{\#\# test = hdi(sorted\_G, ci = 0.95)}
+\NormalTok{\#\#}
+\NormalTok{\#\# AND PLOTTED LIKE THIS}
+\NormalTok{\#\# plot(density(sorted\_G), col = "blue",xlim=c(0,.8))}
+\NormalTok{\#\# abline(v= interval[2], col = "red")}
+\NormalTok{\#\# abline(v= interval[3], col = "red")}
+\NormalTok{\#\# abline(v= test[2], col = "green")}
+\NormalTok{\#\# abline(v= test[3], col = "green")}
+\NormalTok{\#\# OR LIKE BELOW}
+\NormalTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\NormalTok{kernel \textless{}{-} density(G)}
+\NormalTok{kernel \textless{}{-} data.frame(kernel$y, kernel$x)}
+\NormalTok{\#sort the DF based on the Density. }
+\NormalTok{kernel \textless{}{-} kernel[order(kernel$kernel.y, decreasing = TRUE),]}
+\NormalTok{tot\_sum \textless{}{-} sum(kernel$kernel.y)}
+\NormalTok{cum\_dens \textless{}{-} 0.00000000000001}
+\NormalTok{i \textless{}{-} 0}
+\NormalTok{while ((cum\_dens/tot\_sum) \textless{} 0.95)}
+\NormalTok{\{}
+\NormalTok{  i \textless{}{-} (i + 1)}
+\NormalTok{  cum\_dens \textless{}{-} cum\_dens + kernel$kernel.y[i]}
+\NormalTok{\}}
+
+\NormalTok{abline(v = max(kernel$kernel.x[1:i]), col = "blue")}
+\NormalTok{abline(v = min(kernel$kernel.x[1:i]), col = "blue")}
+
+\NormalTok{legend("topright", legend = c("Gini{-}distri", "Quantiles", "HPDI"),}
+\NormalTok{       col = c("black", "red", "blue"), lty = 1)}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}
